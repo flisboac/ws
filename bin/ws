@@ -1,0 +1,5 @@
+#!/bin/sh
+
+export WS_HOME="${WS_HOME:-"$(ws-home)"}" || exit 127
+. "$WS_HOME/shlib/ws.sh"
+ws_main "$@"

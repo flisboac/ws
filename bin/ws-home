@@ -1,0 +1,25 @@
+#!/bin/sh
+
+
+__is_valid() {
+    [ -d "$1" ] && [ -r "$1" ]
+}
+
+if [ ! -z "$WS_HOME" ]; then
+    if [ ! -d "$WS_HOME" ] || [ ! -r "$WS_HOME" ]; then 
+        echo "*** ERROR: Invalid WS_HOME='$WS_HOME': Must be a readable directory."
+        exit 1
+    fi
+    printf "%s\n" "$WS_HOME"
+    exit 0
+    
+else
+    for __folder in ~/.local/share/ws /usr/share/ws /usr/local/share/ws; do
+        if __is_valid "$__folder"; then
+            printf "%s\n" "$__folder"
+            exit 0
+        fi
+    done
+    exit 1
+fi
+
