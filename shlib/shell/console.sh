@@ -1,5 +1,5 @@
 
-[ -n "$__SHLIB_INCLUDED_shell_console_sh__" ] && return || readonly __SHLIB_INCLUDED_shell_console_sh__=1
+[ -n "$__SHLIB_INCLUDED_shell_console_sh__" ] && return || readonly __SHLIB_INCLUDED_shell_console_sh__=0
 
 
 #
@@ -94,11 +94,11 @@ is_false() {
 }
 
 is_success() {
-    is_true "$?"
+    is_true "${1:-"$?"}"
 }
 
 is_failure() {
-    is_false "$?"
+    is_false "${1:-"$?"}"
 }
 
 exitof() {

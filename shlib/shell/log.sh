@@ -1,5 +1,5 @@
 
-[ -n "$__SHLIB_INCLUDED_shell_log_sh__" ] && return || readonly __SHLIB_INCLUDED_shell_log_sh__=1
+[ -n "$__SHLIB_INCLUDED_shell_log_sh__" ] && return || readonly __SHLIB_INCLUDED_shell_log_sh__=0
 
 . "$WS_HOME/shlib/shell/console.sh"
 
@@ -103,7 +103,7 @@ log_lvcolor() {
     fi
 }
 
-is_loggable_lv() { [ "$1" -ge "$LOG_LEVEL" ]; }
+is_loggable_level() { [ "$1" -ge "$LOG_LEVEL" ]; }
 log_getwhen() { date -u -Ins; }
 log_getwhere() { hostname; }
 log_getpid() { echo $$; }
@@ -114,7 +114,7 @@ log_simple() {
     local msg
     local tpl
     lv="$1"; shift
-    ! is_loggable_lv "$lv" && return
+    ! is_loggable_level "$lv" && return
     if [ "$#" -gt 0 ]; then
         tpl="$1"; shift;
         printf "$tpl" "$@" | read msg
@@ -139,7 +139,7 @@ log_long() {
     local tpl
     local line
     lv="$1"; shift
-    ! is_loggable_lv "$lv" && return
+    ! is_loggable_level "$lv" && return
     when="$(log_getwhen)"
     where="$(log_getwhere)"
     pid="$(log_getpid)"

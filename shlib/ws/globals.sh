@@ -1,7 +1,17 @@
 
-[ -n "$__SHLIB_INCLUDED_ws_globals_sh__" ] && return || readonly __SHLIB_INCLUDED_ws_globals_sh__=1
+[ -n "$__SHLIB_INCLUDED_ws_globals_sh__" ] && return || readonly __SHLIB_INCLUDED_ws_globals_sh__=0
 
 . "$WS_HOME/shlib/shell/globals.sh"
+
+readonly WS_VERSION_MAJOR="0"
+readonly WS_VERSION_MINOR="1"
+readonly WS_VERSION_PATCH="0"
+readonly WS_VERSION_IDENT=""
+readonly WS_VERSION="\
+${WS_VERSION_MAJOR}\
+.${WS_VERSION_MINOR}\
+.${WS_VERSION_PATCH}\
+${WS_VERSION_IDENT:+"-$WS_VERSION_IDENT"}"
 
 readonly WS_AT_HOST="host"
 readonly WS_AT_GUEST="guest"
@@ -21,21 +31,17 @@ WS_LOG_MODE="${WS_LOG_MODE:-"simple"}"
 WS_LOG_FILE="$${WS_LOG_FILE:-"-"}"
 WS_LOG_LEVEL="${WS_LOG_LEVEL:-"info"}"
 
-WS_USER_NAME="${WS_USER_NAME:-"$(id -u)"}"
-WS_USER_ID="${WS_USER_ID:-"$(id -n)"}"
-WS_USER_HOME="${WS_USER_HOME:-"$HOME"}"
-WS_USER_SETUP_SCRIPT="${WS_USER_SETUP_SCRIPT:-"$WS_USER_HOME/.profile-setup"}"
-WS_USER_SHELL="${WS_USER_SHELL:-${SHELL:-"/bin/sh"}}"
-WS_GROUP_NAME="${WS_GROUP_NAME:-$WS_USER_NAME}"
-WS_GROUP_ID="${WS_GROUP_NAME:-$WS_USER_ID}"
-WS_USER_HOME="${WS_USER_HOME:-"$HOME"}"
+WS_UNAME="${WS_UNAME:-"$(id -u)"}"
+WS_UID="${WS_UID:-"$(id -n)"}"
+WS_UHOME="${WS_UHOME:-"$HOME"}"
+WS_SHELL="${WS_SHELL:-${SHELL:-"/bin/sh"}}"
+WS_GNAME="${WS_GNAME:-$WS_UNAME}"
+WS_GID="${WS_GNAME:-$WS_UID}"
+WS_UHOME="${WS_UHOME:-"$HOME"}"
 
 WS_WORKSPACES_DIRNAME="${WS_WORKSPACES_DIRNAME:-"workspaces"}"
-WS_WORKSPACES_HOME="${WS_WORKSPACE_HOME:-"$WS_USER_HOME/$WS_WORKSPACES_DIRNAME"}"
+WS_WORKSPACES_HOME="${WS_WORKSPACE_HOME:-"$WS_UHOME/$WS_WORKSPACES_DIRNAME"}"
 
 WS_OS_ID="${OS_ID:?"Could not determine 'WS_OS_ID'."}"
 WS_OS_VERSION="${OS_VERSION:?"Could not determine 'WS_OS_VERSION'."}"
 WS_OS_CODENAME="${OS_CODENAME:?"Could not determine 'WS_OS_CODENAME'."}"
-
-# Space-separated variables that will never be cached
-WS_VARS_BLACKLIST="${WS_VARS_BLACKLIST}"
